@@ -1,7 +1,7 @@
 package com.example.rickandmorty.di
 
-import com.example.rickandmorty.repository.RickAndMortyRepository
-import com.example.rickandmorty.repository.RickAndMortyRepositoryImpl
+import com.example.rickandmorty.repository.CharacterRepository
+import com.example.rickandmorty.repository.CharacterRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,5 +12,5 @@ import dagger.hilt.android.components.ViewModelComponent
 abstract class ViewModelModule {
 
     @Binds
-    abstract fun bindRepoImpl(rickAndMortyRepositoryImpl: RickAndMortyRepositoryImpl): RickAndMortyRepository
+    abstract fun bindRepoImpl(rickAndMortyRepositoryImpl: CharacterRepositoryImpl): CharacterRepository
 }
