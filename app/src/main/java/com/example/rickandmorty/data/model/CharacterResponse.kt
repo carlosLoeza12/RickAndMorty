@@ -1,8 +1,8 @@
 package com.example.rickandmorty.data.model
 
-data class CharacterResponse(val results: List<Result> =  listOf())
+data class CharacterResponse(val results: List<Character> =  listOf())
 
-data class Result(
+data class Character(
     val id: Int = 0,
     val name: String = "",
     val status: String = "",
