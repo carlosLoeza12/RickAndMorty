@@ -1,6 +1,6 @@
-package com.example.rickandmorty.data.local
+package com.example.rickandmorty.data.model
 
-data class CharacterResponse(val result: List<Result> =  emptyList())
+data class CharacterResponse(val results: List<Result> =  listOf())
 
 data class Result(
     val id: Int = 0,
