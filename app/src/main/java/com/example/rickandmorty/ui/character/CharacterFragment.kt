@@ -55,6 +55,7 @@ class CharacterFragment : Fragment(R.layout.fragment_character), CharacterAdapte
 
     override fun onCharacterClick(character: Character, position: Int) {
         clickPosition = position
-        findNavController().navigate(R.id.action_characterFragment_to_characterDetailsFragment)
+        val action = CharacterFragmentDirections.actionCharacterFragmentToCharacterDetailsFragment(character)
+        findNavController().navigate(action)
     }
 }
