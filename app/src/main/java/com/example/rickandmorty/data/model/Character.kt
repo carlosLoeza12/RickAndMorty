@@ -3,7 +3,7 @@ package com.example.rickandmorty.data.model
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-data class CharacterResponse(val results: List<Character> =  listOf())
+data class CharacterList(val results: List<Character> =  listOf())
 
 @Parcelize
 data class Character(

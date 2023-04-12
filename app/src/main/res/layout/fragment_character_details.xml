@@ -6,6 +6,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.characterdetails.CharacterDetailsFragment">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="8dp"
+        android:visibility="gone">
+    </ProgressBar>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,6 +53,18 @@
                android:src="@drawable/ic_thumb"
                app:layout_constraintTop_toBottomOf="@id/imgCharacter"
                app:layout_constraintEnd_toEndOf="parent">
+           </ImageView>
+
+
+           <ImageView
+               android:id="@+id/imgSaved"
+               android:layout_width="40dp"
+               android:layout_height="40dp"
+               android:layout_margin="8dp"
+               android:src="@drawable/ic_thumb_saved"
+               app:layout_constraintTop_toBottomOf="@id/imgCharacter"
+               app:layout_constraintEnd_toEndOf="parent"
+               android:visibility="gone">
            </ImageView>
 
            <ImageView

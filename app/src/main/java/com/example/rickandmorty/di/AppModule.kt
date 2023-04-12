@@ -1,11 +1,16 @@
 package com.example.rickandmorty.di
 
+import android.content.Context
+import androidx.room.Room
 import com.example.rickandmorty.application.AppConstants
+import com.example.rickandmorty.data.local.AppDatabase
+import com.example.rickandmorty.data.local.CharacterDao
 import com.example.rickandmorty.repository.WebService
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -37,5 +42,21 @@ object AppModule {
     @Singleton
     @Provides
     fun provideWebservice(retrofit: Retrofit): WebService = retrofit.create(WebService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideRoomInstance(@ApplicationContext context: Context): AppDatabase{
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            "CharacterDb"
+        ).build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideCharacterDao(appDatabase: AppDatabase): CharacterDao{
+        return appDatabase.CharacterDao()
+    }
 
 }

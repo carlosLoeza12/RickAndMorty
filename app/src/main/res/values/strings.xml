@@ -12,4 +12,8 @@
     <string name="detail_type">Type</string>
     <string name="detail_gender">Gender</string>
     <string name="detail_Title">Details</string>
+    <string name="detail_character_saved">Character saved</string>
+    <string name="detail_error_save_character">Error saving character</string>
+    <string name="detail_character_eliminated">Character eliminated</string>
+    <string name="detail_error_eliminate_character">Error to eliminate character</string>
 </resources>
