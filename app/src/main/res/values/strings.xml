@@ -5,4 +5,11 @@
     <!-- Character Fragment -->
     <string name="no_name">No name</string>
 
+    <!-- Character Detail Fragment -->
+    <string name="detail_name">Name</string>
+    <string name="detail_status">Status</string>
+    <string name="detail_specie">Specie</string>
+    <string name="detail_type">Type</string>
+    <string name="detail_gender">Gender</string>
+    <string name="detail_Title">Details</string>
 </resources>
