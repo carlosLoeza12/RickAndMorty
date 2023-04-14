@@ -15,6 +15,10 @@ class CharacterRepositoryImpl @Inject constructor(
         return remoteDataSource.getAllCharacters()
     }
 
+    override suspend fun getAllCharacterSaved(): CharacterList {
+        return localDataSource.getAllCharactersSaved()
+    }
+
     override suspend fun saveCharacter(character: Character): Long {
         return localDataSource.saveCharacter(character)
     }

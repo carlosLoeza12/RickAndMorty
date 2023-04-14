@@ -6,7 +6,7 @@ import androidx.room.*
 interface CharacterDao {
 
     @Query("SELECT * FROM CharacterEntity")
-    suspend fun getAllCharacters(): List<CharacterEntity>
+    suspend fun getAllCharactersSaved(): List<CharacterEntity>
 
     //if is inserted, so return the row id
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -9,16 +9,16 @@ import com.example.rickandmorty.data.model.Character
 
 class LocalCharacterDataSource @Inject constructor(private val dao: CharacterDao) {
 
-    suspend fun getAllCharacters(): CharacterList {
-        return dao.getAllCharacters().toCharacterList()
+    suspend fun getAllCharactersSaved(): CharacterList {
+        return dao.getAllCharactersSaved().toCharacterList()
     }
 
     suspend fun saveCharacter(character: Character): Long {
         return dao.saveCharacter(character.toCharacterEntity())
     }
 
-    suspend fun deleteCharacter(id: Int): Int{
-        return  dao.deleteCharacter(id)
+    suspend fun deleteCharacter(id: Int): Int {
+        return dao.deleteCharacter(id)
     }
 
     suspend fun getCharacter(id: Int): Character {
