@@ -4,6 +4,7 @@
 
     <!-- Character Fragment -->
     <string name="no_name">No name</string>
+    <string name="characters_saved">Characters saved</string>
 
     <!-- Character Detail Fragment -->
     <string name="detail_name">Name</string>
@@ -16,4 +17,8 @@
     <string name="detail_error_save_character">Error saving character</string>
     <string name="detail_character_eliminated">Character eliminated</string>
     <string name="detail_error_eliminate_character">Error to eliminate character</string>
+
+    <!-- Character Saved fragment-->
+    <string name="format_character_delete">Remove %s character from the list?</string>
+
 </resources>

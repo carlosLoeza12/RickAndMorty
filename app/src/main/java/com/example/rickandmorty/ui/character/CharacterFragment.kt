@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.rickandmorty.R
@@ -33,11 +32,12 @@ class CharacterFragment : Fragment(R.layout.fragment_character), CharacterAdapte
 
     private fun listeners(){
         viewModel.characterList.observe(viewLifecycleOwner) { list ->
+            binding.imgEmptyData.isVisible = false
             initRecycler(list)
         }
 
-        viewModel.isLoadingData.observe(viewLifecycleOwner) {
-            binding.progressBar.isVisible = it
+        viewModel.isLoadingData.observe(viewLifecycleOwner) { isLoading->
+            binding.progressBar.isVisible = isLoading
         }
     }
 
