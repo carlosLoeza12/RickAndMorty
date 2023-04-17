@@ -20,5 +20,6 @@
 
     <!-- Character Saved fragment-->
     <string name="format_character_delete">Remove %s character from the list?</string>
+    <string name="saved_search">Search</string>
 
 </resources>

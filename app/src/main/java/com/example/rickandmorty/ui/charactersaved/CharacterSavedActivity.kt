@@ -4,8 +4,10 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.rickandmorty.R
@@ -23,7 +25,11 @@ class CharacterSavedActivity : AppCompatActivity(), CharacterSavedAdapter.OnChar
     private lateinit var binding: ActivityCharacterSavedBinding
     private lateinit var characterAdapter: CharacterSavedAdapter
     private var mutableListCharacter: MutableList<Character> = mutableListOf()
+    private var filteredList: MutableList<Character> = mutableListOf()
     private var positionCharacterEliminated: Int = -1
+    private var isFilteredList = false
+    private lateinit var dialog: Dialog
+    private lateinit var bindingPopUp: PopUpInformationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +49,39 @@ class CharacterSavedActivity : AppCompatActivity(), CharacterSavedAdapter.OnChar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.characters_saved)
         viewModel.getAllCharacterSaved()
+        //Dialog
+        dialog = Dialog(this)
+        bindingPopUp = PopUpInformationBinding.inflate(LayoutInflater.from(this))
+        dialog.setCancelable(false)
+        dialog.setContentView(bindingPopUp.root)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.search_menu, menu)
+
+        val searchItem = menu?.findItem(R.id.itemSearch);
+        val searchView = searchItem?.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (mutableListCharacter.isNotEmpty()) {
+                    newText?.let {
+                        filterList(newText)
+                        isFilteredList = true
+                    }
+                }
+                return true
+            }
+        })
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
 
     private fun initListeners(){
         viewModel.characterList.observe(this) { characterList ->
@@ -58,8 +96,11 @@ class CharacterSavedActivity : AppCompatActivity(), CharacterSavedAdapter.OnChar
             binding.progressBar.isVisible = isLoading
         }
 
-        viewModel.isCharacterDelete.observe(this){ isDeleted->
-            if(isDeleted){
+        viewModel.isCharacterDelete.observe(this) { isDeleted ->
+
+            if (isDeleted && isFilteredList) {
+                eliminateCharacterInSearchList()
+            } else if (isDeleted) {
                 updateRecycler()
             }
         }
@@ -81,22 +122,17 @@ class CharacterSavedActivity : AppCompatActivity(), CharacterSavedAdapter.OnChar
     }
 
     private fun showDialog(character: Character, position: Int) {
-        val dialog = Dialog(this)
-        dialog.setCancelable(false)
-        val binding = PopUpInformationBinding.inflate(LayoutInflater.from(this))
-        dialog.setContentView(binding.root)
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
         //binding
-        binding.txtInformation.text = getString(R.string.format_character_delete, character.name)
+        bindingPopUp.txtInformation.text = getString(R.string.format_character_delete, character.name)
 
-        binding.btnYes.setOnClickListener {
+        bindingPopUp.btnYes.setOnClickListener {
             dialog.dismiss()
             viewModel.deleteCharacter(character.id)
             positionCharacterEliminated = position
+//            Log.e("errorP", positionCharacterEliminated.toString())
         }
 
-        binding.btnNo.setOnClickListener {
+        bindingPopUp.btnNo.setOnClickListener {
             dialog.dismiss()
         }
 
@@ -104,12 +140,34 @@ class CharacterSavedActivity : AppCompatActivity(), CharacterSavedAdapter.OnChar
     }
 
     private fun updateRecycler(){
+
         mutableListCharacter.removeAt(positionCharacterEliminated)
         characterAdapter.notifyItemRemoved(positionCharacterEliminated)
         positionCharacterEliminated = -1
         //validate if empty list
         if(mutableListCharacter.isEmpty()){
             binding.imgEmptyData.isVisible = true
+        }
+
+    }
+
+    private fun filterList(query: String) {
+        filteredList = mutableListCharacter.filter { character ->
+            //the condition is that it contains in the name the letters that we pass to it
+            character.name.lowercase().contains(query.lowercase())
+        }.toMutableList()
+
+        //Log.e("errorZ", filteredList.size.toString())
+        characterAdapter.updateCharacterRecycler(filteredList)
+    }
+
+    private fun eliminateCharacterInSearchList(){
+        mutableListCharacter.forEachIndexed { index, character ->
+           if(character.id == filteredList[positionCharacterEliminated].id){
+               mutableListCharacter.removeAt(index)
+               filteredList.removeAt(positionCharacterEliminated)
+               characterAdapter.notifyItemRemoved(positionCharacterEliminated)
+           }
         }
     }
 
