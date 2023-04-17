@@ -45,7 +45,7 @@ class CharacterSavedViewModel @Inject constructor(private val repository: Charac
     }
 
     fun deleteCharacter(id: Int) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Main) {
             _isLoading.value = true
             try {
 

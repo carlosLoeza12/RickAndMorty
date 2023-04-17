@@ -1,5 +1,6 @@
 package com.example.rickandmorty.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import com.example.rickandmorty.data.model.Character
 import com.example.rickandmorty.databinding.CharacterListItemBinding
 
 class CharacterSavedAdapter(
-    private val mutableList: MutableList<Character>,
+    private var characterList: List<Character>,
     private val onCharacterClickListener: OnCharacterClickListener
 ) : RecyclerView.Adapter<CharacterSavedAdapter.ViewHolderCharacter>() {
 
@@ -25,17 +26,17 @@ class CharacterSavedAdapter(
             val position = holder.adapterPosition.takeIf {
                 it != -1
             } ?: return@setOnClickListener
-            onCharacterClickListener.onCharacterClick(mutableList[position], position)
+            onCharacterClickListener.onCharacterClick(characterList[position], position)
         }
 
         return holder
     }
 
     override fun onBindViewHolder(holder: ViewHolderCharacter, position: Int) {
-        holder.bind(mutableList[position])
+        holder.bind(characterList[position])
     }
 
-    override fun getItemCount(): Int = mutableList.size
+    override fun getItemCount(): Int = characterList.size
 
     inner class ViewHolderCharacter(private val binding: CharacterListItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(character: Character){
@@ -43,5 +44,11 @@ class CharacterSavedAdapter(
             binding.txtCharacterName.text = character.name
             binding.imgDelete.visibility = View.VISIBLE
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateCharacterRecycler(list: List<Character>){
+        this.characterList = list
+        notifyDataSetChanged()
     }
 }
