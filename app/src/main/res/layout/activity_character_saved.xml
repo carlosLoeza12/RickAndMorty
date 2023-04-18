@@ -22,7 +22,8 @@
         android:id="@+id/recyclerCharacters"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/character_list_item">
+        tools:listitem="@layout/character_list_item"
+        android:splitMotionEvents="false">
     </androidx.recyclerview.widget.RecyclerView>
 
     <ImageView
