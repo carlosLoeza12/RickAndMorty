@@ -1,5 +1,8 @@
 package com.example.rickandmorty.repository
 
+import androidx.lifecycle.LiveData
+import androidx.paging.Pager
+import androidx.paging.PagingData
 import com.example.rickandmorty.data.local.LocalCharacterDataSource
 import com.example.rickandmorty.data.model.Character
 import com.example.rickandmorty.data.model.CharacterList
@@ -30,4 +33,9 @@ class CharacterRepositoryImpl @Inject constructor(
     override suspend fun getCharacter(id: Int): Character {
         return localDataSource.getCharacter(id)
     }
+
+    override fun getAllCharacterPaging(): LiveData<PagingData<Character>> {
+        return remoteDataSource.getAllCharactersPaging()
+    }
+
 }
