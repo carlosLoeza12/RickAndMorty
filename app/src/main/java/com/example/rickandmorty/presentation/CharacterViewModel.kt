@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.rickandmorty.data.model.Character
 import com.example.rickandmorty.repository.CharacterRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,5 +42,8 @@ class CharacterViewModel @Inject constructor(private val repository: CharacterRe
             }
         }
     }
+
+
+    val list: LiveData<PagingData<Character>> =  repository.getAllCharacterPaging().cachedIn(viewModelScope)
 
 }
