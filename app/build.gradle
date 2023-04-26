@@ -8,6 +8,16 @@ plugins {
 }
 
 android {
+
+    signingConfigs {
+        release {
+            storeFile file('C:/Users/carlo/OneDrive/Escritorio/Key/RickAndMortyKey.jks')
+            storePassword 'rickandmorty12'
+            keyAlias 'rickandmortyapp'
+            keyPassword 'rickandmorty12'
+        }
+    }
+
     namespace 'com.characters.rickandmorty'
     compileSdk 33
 
@@ -15,8 +25,8 @@ android {
         applicationId "com.characters.rickandmorty"
         minSdk 21
         targetSdk 32
-        versionCode 1
-        versionName "1.0.0"
+        versionCode 3
+        versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -25,8 +35,32 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable false
+            signingConfig signingConfigs.release
+        }
+
+        debug{
+            applicationIdSuffix ".debug"
+            debuggable true
         }
     }
+
+//    flavorDimensions "version"
+//    productFlavors{
+//        freeVersion{
+//            applicationIdSuffix ".free"
+//            versionNameSuffix "-free"
+//            buildConfigField 'String' , 'URL' , '"free.com"'
+//        }
+//
+//        premiumVersion{
+//            applicationIdSuffix ".premium"
+//            versionNameSuffix "-premiun"
+//            buildConfigField 'String' , 'URL' , '"premium.com"'
+//        }
+//
+//    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
