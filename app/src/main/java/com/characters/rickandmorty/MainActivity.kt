@@ -37,4 +37,22 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+//    private fun appConfigs(){
+//
+//        Log.e("aaa", BuildConfig.BUILD_TYPE)
+//
+//        if(BuildConfig.BUILD_TYPE == "release"){
+//
+//        }
+//
+//        if(BuildConfig.FLAVOR == "premium"){
+//
+//        }else{
+//
+//        }
+//
+//        val a = BuildConfig.URL
+//
+//    }
 }
