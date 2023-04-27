@@ -13,5 +13,13 @@ data class Character(
     val species: String = "",
     val type: String = "",
     val gender: String = "",
-    val image: String = ""
+    val image: String = "",
+    val origin: Origin? = null,
+    val episode: List<String> = emptyList()
+): Parcelable
+
+@Parcelize
+data class Origin(
+    val name: String  = "",
+    val url: String  = ""
 ): Parcelable

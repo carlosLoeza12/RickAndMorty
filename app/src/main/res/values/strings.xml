@@ -5,6 +5,7 @@
     <!-- Character Fragment -->
     <string name="no_name">No name</string>
     <string name="characters_saved">Characters saved</string>
+    <string name="characters_na">N/A</string>
 
     <!-- Character Detail Fragment -->
     <string name="detail_name">Name</string>
@@ -12,11 +13,16 @@
     <string name="detail_specie">Specie</string>
     <string name="detail_type">Type</string>
     <string name="detail_gender">Gender</string>
-    <string name="detail_Title">Details</string>
+    <string name="detail_general_info">General information</string>
     <string name="detail_character_saved">Character saved</string>
     <string name="detail_error_save_character">Error saving character</string>
     <string name="detail_character_eliminated">Character eliminated</string>
     <string name="detail_error_eliminate_character">Error to eliminate character</string>
+    <string name="detail_origin">Origin</string>
+    <string name="detail_dimension">Dimension</string>
+    <string name="detail_first_see_in">First see in</string>
+    <string name="detail_air_date">Air date</string>
+    <string name="detail_episode">Episode</string>
 
     <!-- Character Saved fragment-->
     <string name="format_character_delete">Remove %s character from the list?</string>
