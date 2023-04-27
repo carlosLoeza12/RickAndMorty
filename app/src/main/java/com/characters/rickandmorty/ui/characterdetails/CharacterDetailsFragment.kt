@@ -28,6 +28,13 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
         args.character?.let { character ->
             setCharacterData(character)
             viewModel.getCharacter(character.id)
+            character.origin?.url?.let {
+                viewModel.getCharacterLocation(character.origin.url)
+            }
+
+            if(character.episode.isNotEmpty()){
+                viewModel.getCharacterEpisode(character.episode[0])
+            }
         }
 
         initListeners()
@@ -44,6 +51,24 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
 
     private fun initListeners(){
 
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            binding.progressBar.isVisible = it
+        }
+
+        viewModel.isFoundCharacter.observe(viewLifecycleOwner) { isFound ->
+            if(isFound){
+                binding.imgSave.visibility = View.GONE
+                binding.imgSaved.visibility = View.VISIBLE
+            }
+        }
+
+        characterSave()
+        characterEliminate()
+        characterLocation()
+        characterEpisode()
+    }
+
+    private fun characterSave() {
         //For save the character
         binding.imgSave.setOnClickListener {
             viewModel.saveCharacter(args.character!!)
@@ -58,11 +83,9 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
                 Toast.makeText(activity, R.string.detail_gender, Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            binding.progressBar.isVisible = it
-        }
-
+    private fun characterEliminate() {
         //For delete the character
         binding.imgSaved.setOnClickListener {
             viewModel.deleteCharacter(args.character!!.id)
@@ -72,17 +95,34 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
             if (isDeleted) {
                 binding.imgSaved.visibility = View.GONE
                 binding.imgSave.visibility = View.VISIBLE
-                Toast.makeText(activity, R.string.detail_character_eliminated, Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(activity, R.string.detail_error_eliminate_character, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, R.string.detail_character_eliminated, Toast.LENGTH_SHORT) .show()
+            } else {
+                Toast.makeText(activity ,R.string.detail_error_eliminate_character, Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
-        viewModel.isFoundCharacter.observe(viewLifecycleOwner) { isFound ->
-            if(isFound){
-                binding.imgSave.visibility = View.GONE
-                binding.imgSaved.visibility = View.VISIBLE
-            }
+    private fun characterLocation(){
+        viewModel.isLoadingLocation.observe(viewLifecycleOwner){ isLoading ->
+            binding.progressOrigin.isVisible = isLoading
+        }
+
+        viewModel.characterLocation.observe(viewLifecycleOwner){ location ->
+            binding.txtOriginName.text = location.name
+            binding.txtOriginType.text = location.type
+            binding.txtOriginDimension.text = location.dimension
+        }
+    }
+
+    private fun characterEpisode(){
+        viewModel.isLoadingEpisode.observe(viewLifecycleOwner){ isLoading ->
+            binding.progressEpisode.isVisible = isLoading
+        }
+
+        viewModel.characterEpisode.observe(viewLifecycleOwner){ episode ->
+            binding.txtEpisodeName.text = episode.name
+            binding.txtEpisode.text = episode.episode
+            binding.txtEpisodeAirDate.text = episode.air_date
         }
     }
 
