@@ -28,4 +28,19 @@
             app:argType="com.characters.rickandmorty.data.model.Character"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/characterEpisodesFragment"
+        android:name="com.characters.rickandmorty.ui.characterepisodes.CharacterEpisodesFragment"
+        android:label="fragment_character_episodes"
+        tools:layout="@layout/fragment_character_episodes" />
+    <fragment
+        android:id="@+id/characterLocationsFragment"
+        android:name="com.characters.rickandmorty.ui.characterlocations.CharacterLocationsFragment"
+        android:label="fragment_character_locations"
+        tools:layout="@layout/fragment_character_locations" />
+    <fragment
+        android:id="@+id/characterSavedFragment"
+        android:name="com.characters.rickandmorty.ui.charactersaved.CharacterSavedFragment"
+        android:label="fragment_character_saved"
+        tools:layout="@layout/fragment_character_saved" />
 </navigation>

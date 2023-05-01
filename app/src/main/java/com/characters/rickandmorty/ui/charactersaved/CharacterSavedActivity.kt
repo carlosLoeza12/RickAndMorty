@@ -95,14 +95,13 @@ class CharacterSavedActivity : AppCompatActivity(), CharacterSavedAdapter.OnChar
             binding.progressBar.isVisible = isLoading
         }
 
-        viewModel.isCharacterDelete.observe(this) { isDeleted ->
-
-            if (isDeleted && isFilteredList) {
-                eliminateCharacterInSearchList()
-            } else if (isDeleted) {
-                updateRecycler()
-            }
-        }
+//        viewModel.isCharacterDelete.observe(this) { isDeleted ->
+//            if (isDeleted && isFilteredList) {
+//                eliminateCharacterInSearchList()
+//            } else if (isDeleted) {
+//                updateRecycler()
+//            }
+//        }
     }
 
     private fun initRecycler(mutableList: MutableList<Character>){
@@ -126,7 +125,7 @@ class CharacterSavedActivity : AppCompatActivity(), CharacterSavedAdapter.OnChar
 
         bindingPopUp.btnYes.setOnClickListener {
             dialog.dismiss()
-            viewModel.deleteCharacter(character.id)
+          //  viewModel.deleteCharacter(character.id)
             positionCharacterEliminated = position
 //            Log.e("errorP", positionCharacterEliminated.toString())
         }
