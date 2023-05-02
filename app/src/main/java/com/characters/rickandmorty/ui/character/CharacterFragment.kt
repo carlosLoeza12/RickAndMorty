@@ -1,7 +1,6 @@
 package com.characters.rickandmorty.ui.character
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.view.isVisible
@@ -15,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.characters.rickandmorty.data.model.Character
 import com.characters.rickandmorty.ui.adapters.CharacterPagingAdapter
 import com.characters.rickandmorty.ui.adapters.LoaderAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 @AndroidEntryPoint
 class CharacterFragment : Fragment(R.layout.fragment_character), CharacterPagingAdapter.OnCharacterClickListener {
@@ -28,8 +28,16 @@ class CharacterFragment : Fragment(R.layout.fragment_character), CharacterPaging
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCharacterBinding.bind(view)
 
+        showBottomNavigationView()
         initRecycler()
         listeners()
+    }
+
+    private fun showBottomNavigationView(){
+        val bottomNavigation = activity?.findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        if(bottomNavigation?.isVisible == false){
+            bottomNavigation.isVisible = true
+        }
     }
 
     private fun listeners(){

@@ -4,13 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.characters.rickandmorty.data.model.Character
 import com.characters.rickandmorty.repository.CharacterRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
-import com.characters.rickandmorty.data.model.Character
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 @HiltViewModel
 class CharacterSavedViewModel @Inject constructor(private val repository: CharacterRepository) : ViewModel() {
@@ -20,9 +21,6 @@ class CharacterSavedViewModel @Inject constructor(private val repository: Charac
 
     private val _characterList = MutableLiveData<List<Character>>()
     val characterList: LiveData<List<Character>> = _characterList
-
-    private val _isCharacterDelete = MutableLiveData<Boolean>()
-    val isCharacterDelete: LiveData<Boolean> = _isCharacterDelete
 
     fun getAllCharacterSaved() {
         viewModelScope.launch {
@@ -44,24 +42,38 @@ class CharacterSavedViewModel @Inject constructor(private val repository: Charac
         }
     }
 
-    fun deleteCharacter(id: Int) {
-        viewModelScope.launch(Dispatchers.Main) {
-            _isLoading.value = true
+//    fun deleteCharacter(id: Int) {
+//        viewModelScope.launch(Dispatchers.Main) {
+//            _isLoading.value = true
+//            try {
+//
+//                val resultRowAffected = withContext(Dispatchers.IO) {
+//                    repository.deleteCharacter(id)
+//                }
+//
+//                if (resultRowAffected != 0) {
+//                    _isCharacterDelete.value = true
+//                }
+//                _isLoading.value = false
+//
+//            } catch (e: Exception) {
+//                _isLoading.value = false
+//                _isCharacterDelete.value = false
+//            }
+//        }
+//    }
+
+    fun deleteCharacter(characterId: Int): Boolean {
+        val result = runBlocking(Dispatchers.Default) {
             try {
-
-                val resultRowAffected = withContext(Dispatchers.IO) {
-                    repository.deleteCharacter(id)
-                }
-
-                if (resultRowAffected != 0) {
-                    _isCharacterDelete.value = true
-                }
-                _isLoading.value = false
-
+                _isLoading.postValue(true)
+                val resultRowAffected = withContext(Dispatchers.IO) { repository.deleteCharacter(characterId) }
+                _isLoading.postValue(false)
+                resultRowAffected != 0
             } catch (e: Exception) {
-                _isLoading.value = false
-                _isCharacterDelete.value = false
+                false
             }
         }
+        return result
     }
 }
