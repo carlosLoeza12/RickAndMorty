@@ -38,10 +38,10 @@ class CharacterSavedActivity : AppCompatActivity(), CharacterSavedAdapter.OnChar
         initListeners()
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return super.onSupportNavigateUp()
-    }
+//    override fun onSupportNavigateUp(): Boolean {
+//        finish()
+//        return super.onSupportNavigateUp()
+//    }
 
     private fun initComponents(){
         //Status bar

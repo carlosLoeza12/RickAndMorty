@@ -1,18 +1,20 @@
 package com.characters.rickandmorty.ui.characterdetails
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.characters.rickandmorty.R
-import com.characters.rickandmorty.databinding.FragmentCharacterDetailsBinding
-import dagger.hilt.android.AndroidEntryPoint
 import com.characters.rickandmorty.data.model.Character
+import com.characters.rickandmorty.databinding.FragmentCharacterDetailsBinding
 import com.characters.rickandmorty.presentation.CharacterDetailViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
@@ -25,6 +27,19 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCharacterDetailsBinding.bind(view)
 
+        hideBottomNavigationView()
+        getCharacterData()
+        initListeners()
+    }
+
+    private fun hideBottomNavigationView(){
+        val bottomNavigation = activity?.findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        if(bottomNavigation?.isVisible == true){
+            bottomNavigation.isVisible = false
+        }
+    }
+
+    private fun getCharacterData() {
         args.character?.let { character ->
             setCharacterData(character)
             viewModel.getCharacter(character.id)
@@ -32,12 +47,10 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
                 viewModel.getCharacterLocation(character.origin.url)
             }
 
-            if(character.episode.isNotEmpty()){
+            if (character.episode.isNotEmpty()) {
                 viewModel.getCharacterEpisode(character.episode[0])
             }
         }
-
-        initListeners()
     }
 
     private fun setCharacterData(character: Character){

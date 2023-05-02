@@ -7,12 +7,14 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.characters.rickandmorty.databinding.ActivityMainBinding
 import com.characters.rickandmorty.ui.charactersaved.CharacterSavedActivity
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -29,8 +31,13 @@ class MainActivity : AppCompatActivity() {
         navController =  navHostFragment.navController
 
         binding.bottomNavigation.setupWithNavController(navController)
+        //set up action bar with nav controller
+        NavigationUI.setupActionBarWithNavController(this, navController)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp()
+    }
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 //        menuInflater.inflate(R.menu.home_menu, menu)
 //        return super.onCreateOptionsMenu(menu)
