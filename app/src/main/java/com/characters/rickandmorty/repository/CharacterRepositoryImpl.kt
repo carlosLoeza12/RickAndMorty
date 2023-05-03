@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
 import com.characters.rickandmorty.data.local.LocalCharacterDataSource
 import com.characters.rickandmorty.data.model.Character
-import com.characters.rickandmorty.data.model.CharacterEpisode
+import com.characters.rickandmorty.data.model.Episode
 import com.characters.rickandmorty.data.model.CharacterList
-import com.characters.rickandmorty.data.model.CharacterLocation
+import com.characters.rickandmorty.data.model.Location
 import com.characters.rickandmorty.data.remote.RemoteCharacterDataSource
 import javax.inject.Inject
 
@@ -35,15 +35,23 @@ class CharacterRepositoryImpl @Inject constructor(
         return localDataSource.getCharacter(id)
     }
 
-    override fun getAllCharacterPaging(): LiveData<PagingData<Character>> {
+    override fun getAllCharactersPaging(): LiveData<PagingData<Character>> {
         return remoteDataSource.getAllCharactersPaging()
     }
 
-    override suspend fun getCharacterLocation(locationUrl: String): CharacterLocation? {
+    override fun getAllLocationsPaging(): LiveData<PagingData<Location>> {
+        return remoteDataSource.getAllLocationsPaging()
+    }
+
+    override fun getAllEpisodesPaging(): LiveData<PagingData<Episode>> {
+        return remoteDataSource.getAllEpisodesPaging()
+    }
+
+    override suspend fun getCharacterLocation(locationUrl: String): Location? {
         return remoteDataSource.getCharacterLocation(locationUrl)
     }
 
-    override suspend fun getCharacterEpisode(episodeUrl: String): CharacterEpisode? {
+    override suspend fun getCharacterEpisode(episodeUrl: String): Episode? {
         return remoteDataSource.getCharacterEpisode(episodeUrl)
     }
 

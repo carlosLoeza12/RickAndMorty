@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.characters.rickandmorty.data.model.Character
-import com.characters.rickandmorty.data.model.CharacterEpisode
-import com.characters.rickandmorty.data.model.CharacterLocation
+import com.characters.rickandmorty.data.model.Episode
+import com.characters.rickandmorty.data.model.Location
 import com.characters.rickandmorty.repository.CharacterRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,14 +32,14 @@ class CharacterDetailViewModel @Inject constructor (private val repository: Char
     private val _isLoadingLocation = MutableLiveData<Boolean>()
     val isLoadingLocation: LiveData<Boolean> = _isLoadingLocation
 
-    private val _characterLocation = MutableLiveData<CharacterLocation>()
-    val characterLocation: LiveData<CharacterLocation> = _characterLocation
+    private val _location = MutableLiveData<Location>()
+    val location: LiveData<Location> = _location
 
     private val _isLoadingEpisode = MutableLiveData<Boolean>()
     val isLoadingEpisode: LiveData<Boolean> = _isLoadingEpisode
 
-    private val _characterEpisode = MutableLiveData<CharacterEpisode>()
-    val characterEpisode: LiveData<CharacterEpisode> = _characterEpisode
+    private val _episode = MutableLiveData<Episode>()
+    val episode: LiveData<Episode> = _episode
 
     fun getCharacter(id: Int) {
         //this method validate if the character is saved
@@ -112,7 +112,7 @@ class CharacterDetailViewModel @Inject constructor (private val repository: Char
                 }
 
                 locationResult?.let {
-                    _characterLocation.value = locationResult!!
+                    _location.value = locationResult!!
                 }
 
                 _isLoadingLocation.value = false
@@ -133,7 +133,7 @@ class CharacterDetailViewModel @Inject constructor (private val repository: Char
                 }
 
                 episodeResult?.let {
-                    _characterEpisode.value = episodeResult!!
+                    _episode.value = episodeResult!!
                 }
 
                 _isLoadingEpisode.value = false

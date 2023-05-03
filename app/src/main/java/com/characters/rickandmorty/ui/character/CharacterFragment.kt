@@ -3,9 +3,11 @@ package com.characters.rickandmorty.ui.character
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.characters.rickandmorty.R
 import com.characters.rickandmorty.databinding.FragmentCharacterBinding
@@ -52,6 +54,16 @@ class CharacterFragment : Fragment(R.layout.fragment_character), CharacterPaging
 
     private fun initRecycler() {
         pagingAdapter = CharacterPagingAdapter(this)
+
+        pagingAdapter.addLoadStateListener { loadState ->
+
+            binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+
+            if(loadState.source.refresh is LoadState.Error){
+                Toast.makeText(requireContext(), getString(R.string.error_loading_data), Toast.LENGTH_SHORT).show()
+                binding.imgEmptyData.isVisible = true
+            }
+        }
 
         binding.recyclerCharacters.apply {
             layoutManager = GridLayoutManager(this@CharacterFragment.context, 2)

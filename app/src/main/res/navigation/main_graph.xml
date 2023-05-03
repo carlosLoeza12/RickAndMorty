@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/characterEpisodesFragment"
         android:name="com.characters.rickandmorty.ui.characterepisodes.CharacterEpisodesFragment"
-        android:label="@string/detail_episode"
+        android:label="@string/Episodes_title"
         tools:layout="@layout/fragment_character_episodes" />
     <fragment
         android:id="@+id/characterLocationsFragment"
