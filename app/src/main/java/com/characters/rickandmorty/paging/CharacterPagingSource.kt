@@ -24,7 +24,7 @@ class CharacterPagingSource (private val webService: WebService): PagingSource<I
             LoadResult.Page(
                 data = responseData,
                 prevKey = if(currentPage == 1) null else -1,
-                nextKey = currentPage.plus(1)
+                nextKey = if(data.isEmpty()) null else currentPage.plus(1)
             )
 
         } catch (e: Exception){

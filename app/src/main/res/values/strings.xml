@@ -7,6 +7,7 @@
     <string name="locations_tilte">Locations</string>
     <string name="Episodes_title">Episodes</string>
     <string name="save_title">Saved</string>
+    <string name="error_loading_data">Error loading data</string>
 
     <!-- Character Fragment -->
     <string name="no_name">No name</string>
@@ -36,5 +37,13 @@
     <string name="saved_search">Search</string>
     <string name="saved_title">Saved</string>
 
+    <!-- Character Locations-->
+    <string name="format_location_name">Name: %s</string>
+    <string name="format_location_type">Type: %s</string>
+    <string name="format_location_dimension">Dimension: %s</string>
+
+    <!-- Character Episodes-->
+    <string name="format_episode_air_date">Air date: %s</string>
+    <string name="format_episode">Episode: %s</string>
 
 </resources>

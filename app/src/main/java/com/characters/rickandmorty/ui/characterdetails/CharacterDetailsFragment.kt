@@ -93,7 +93,7 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
                 binding.imgSaved.visibility = View.VISIBLE
                 Toast.makeText(activity, R.string.detail_character_saved, Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(activity, R.string.detail_gender, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, R.string.detail_error_save_character, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -120,7 +120,7 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
             binding.progressOrigin.isVisible = isLoading
         }
 
-        viewModel.characterLocation.observe(viewLifecycleOwner){ location ->
+        viewModel.location.observe(viewLifecycleOwner){ location ->
             binding.txtOriginName.text = location.name
             binding.txtOriginType.text = location.type
             binding.txtOriginDimension.text = location.dimension
@@ -132,7 +132,7 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details) {
             binding.progressEpisode.isVisible = isLoading
         }
 
-        viewModel.characterEpisode.observe(viewLifecycleOwner){ episode ->
+        viewModel.episode.observe(viewLifecycleOwner){ episode ->
             binding.txtEpisodeName.text = episode.name
             binding.txtEpisode.text = episode.episode
             binding.txtEpisodeAirDate.text = episode.air_date
