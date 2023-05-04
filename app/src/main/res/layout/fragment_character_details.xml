@@ -6,203 +6,429 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.characterdetails.CharacterDetailsFragment">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:elevation="8dp"
-        android:visibility="gone">
-    </ProgressBar>
+        android:fillViewport="true">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/detail_Title"
-        android:gravity="center"
-        android:textColor="@color/blue"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/cardCharacter"
-        android:textSize="30sp"
-        android:textStyle="italic">
-    </TextView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-   <androidx.cardview.widget.CardView
-       android:id="@+id/cardCharacter"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:cardElevation="6dp"
-       app:cardCornerRadius="12dp"
-       android:layout_margin="18dp">
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:elevation="8dp"
+                android:visibility="gone">
+            </ProgressBar>
 
-       <androidx.constraintlayout.widget.ConstraintLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/txtGeneralInfoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_general_info"
+                android:textColor="@color/blue"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/cardCharacter"
+                android:layout_marginTop="18dp"
+                android:textSize="24sp"
+                android:paddingHorizontal="18dp"
+                android:textStyle="italic">
+            </TextView>
 
-           <ImageView
-               android:id="@+id/imgSave"
-               android:layout_width="40dp"
-               android:layout_height="40dp"
-               android:layout_margin="8dp"
-               android:src="@drawable/ic_thumb"
-               app:layout_constraintTop_toBottomOf="@id/imgCharacter"
-               app:layout_constraintEnd_toEndOf="parent">
-           </ImageView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardCharacter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtGeneralInfoTitle"
+                app:layout_constraintBottom_toTopOf="@+id/txtOriginTitle"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="18dp">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-           <ImageView
-               android:id="@+id/imgSaved"
-               android:layout_width="40dp"
-               android:layout_height="40dp"
-               android:layout_margin="8dp"
-               android:src="@drawable/ic_thumb_saved"
-               app:layout_constraintTop_toBottomOf="@id/imgCharacter"
-               app:layout_constraintEnd_toEndOf="parent"
-               android:visibility="gone">
-           </ImageView>
-
-           <ImageView
-               android:id="@+id/imgCharacter"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintTop_toTopOf="parent"
-               android:layout_width="match_parent"
-               android:layout_height="250dp"
-               android:src="@mipmap/ic_launcher"
-               android:scaleType="fitXY">
-           </ImageView>
-
-           <androidx.appcompat.widget.LinearLayoutCompat
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               app:layout_constraintTop_toBottomOf="@id/imgCharacter"
-               app:layout_constraintBottom_toBottomOf="parent"
-               android:orientation="vertical"
-               android:padding="12dp">
-
-               <TextView
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginTop="12dp"
-                   android:textSize="18sp"
-                   android:text="@string/detail_name"
-                   android:textColor="@color/blue">
-               </TextView>
-
-               <TextView
-                   android:id="@+id/txtName"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:text="@string/detail_name"
-                   android:textColor="@color/black">
-               </TextView>
-
-               <com.google.android.material.divider.MaterialDivider
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-               </com.google.android.material.divider.MaterialDivider>
-
-               <TextView
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginTop="12dp"
-                   android:textSize="18sp"
-                   android:text="@string/detail_status"
-                   android:textColor="@color/blue">
-               </TextView>
-
-               <TextView
-                   android:id="@+id/txtStatus"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:text="@string/detail_status"
-                   android:textColor="@color/black">
-               </TextView>
-
-               <com.google.android.material.divider.MaterialDivider
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-               </com.google.android.material.divider.MaterialDivider>
-
-               <TextView
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginTop="12dp"
-                   android:textSize="18sp"
-                   android:text="@string/detail_specie"
-                   android:textColor="@color/blue">
-               </TextView>
-
-               <TextView
-                   android:id="@+id/txtSpecie"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:text="@string/detail_specie"
-                   android:textColor="@color/black">
-               </TextView>
-
-               <com.google.android.material.divider.MaterialDivider
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-               </com.google.android.material.divider.MaterialDivider>
+                    <ImageView
+                        android:id="@+id/imgSave"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/ic_thumb"
+                        app:layout_constraintTop_toBottomOf="@id/imgCharacter"
+                        app:layout_constraintEnd_toEndOf="parent">
+                    </ImageView>
 
 
-               <TextView
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginTop="12dp"
-                   android:textSize="18sp"
-                   android:text="@string/detail_type"
-                   android:textColor="@color/blue">
-               </TextView>
+                    <ImageView
+                        android:id="@+id/imgSaved"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/ic_thumb_saved"
+                        app:layout_constraintTop_toBottomOf="@id/imgCharacter"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:visibility="gone">
+                    </ImageView>
 
-               <TextView
-                   android:id="@+id/txtType"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:text="@string/detail_type"
-                   android:textColor="@color/black">
-               </TextView>
+                    <ImageView
+                        android:id="@+id/imgCharacter"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:src="@mipmap/ic_launcher"
+                        android:scaleType="fitXY">
+                    </ImageView>
 
-               <com.google.android.material.divider.MaterialDivider
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-               </com.google.android.material.divider.MaterialDivider>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/imgCharacter"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:orientation="vertical"
+                        android:padding="12dp">
 
-               <TextView
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginTop="12dp"
-                   android:textSize="18sp"
-                   android:text="@string/detail_gender"
-                   android:textColor="@color/blue">
-               </TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:textSize="18sp"
+                            android:text="@string/detail_name"
+                            android:textColor="@color/blue">
+                        </TextView>
 
-               <TextView
-                   android:id="@+id/txtGender"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:text="@string/detail_gender"
-                   android:textColor="@color/black">
-               </TextView>
+                        <TextView
+                            android:id="@+id/txtName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/detail_name"
+                            android:textColor="@color/black">
+                        </TextView>
 
-               <com.google.android.material.divider.MaterialDivider
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginBottom="12dp">
-               </com.google.android.material.divider.MaterialDivider>
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </com.google.android.material.divider.MaterialDivider>
 
-           </androidx.appcompat.widget.LinearLayoutCompat>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:textSize="18sp"
+                            android:text="@string/detail_status"
+                            android:textColor="@color/blue">
+                        </TextView>
 
-       </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:id="@+id/txtStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/detail_status"
+                            android:textColor="@color/black">
+                        </TextView>
 
-   </androidx.cardview.widget.CardView>
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </com.google.android.material.divider.MaterialDivider>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:textSize="18sp"
+                            android:text="@string/detail_specie"
+                            android:textColor="@color/blue">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/txtSpecie"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/detail_specie"
+                            android:textColor="@color/black">
+                        </TextView>
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </com.google.android.material.divider.MaterialDivider>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:textSize="18sp"
+                            android:text="@string/detail_type"
+                            android:textColor="@color/blue">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/txtType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/detail_type"
+                            android:textColor="@color/black">
+                        </TextView>
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </com.google.android.material.divider.MaterialDivider>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:textSize="18sp"
+                            android:text="@string/detail_gender"
+                            android:textColor="@color/blue">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/txtGender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/detail_gender"
+                            android:textColor="@color/black">
+                        </TextView>
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp">
+                        </com.google.android.material.divider.MaterialDivider>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/txtOriginTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:paddingHorizontal="18dp"
+                android:text="@string/detail_origin"
+                android:textColor="@color/blue"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                app:layout_constraintTop_toBottomOf="@+id/cardCharacter"
+                app:layout_constraintBottom_toTopOf="@id/cardOrigin"
+                tools:layout_editor_absoluteX="0dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardOrigin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtOriginTitle"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="18dp">
+
+                <ProgressBar
+                    android:id="@+id/progressOrigin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+                </ProgressBar>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgCharacter">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/detail_name"
+                        android:textColor="@color/blue"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/txtOriginName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_name"
+                        android:textColor="@color/black"/>
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/detail_type"
+                        android:textColor="@color/blue"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/txtOriginType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_type"
+                        android:textColor="@color/black">
+                    </TextView>
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/detail_dimension"
+                        android:textColor="@color/blue"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/txtOriginDimension"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_dimension"
+                        android:textColor="@color/black">
+                    </TextView>
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/txtEpisodeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_first_see_in"
+                android:textColor="@color/blue"
+                app:layout_constraintTop_toBottomOf="@id/cardOrigin"
+                app:layout_constraintBottom_toTopOf="@id/cardEpisode"
+                android:layout_marginTop="18dp"
+                android:textSize="24sp"
+                android:paddingHorizontal="18dp"
+                android:textStyle="italic">
+            </TextView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardEpisode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtEpisodeTitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="18dp">
+
+                <ProgressBar
+                    android:id="@+id/progressEpisode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+                </ProgressBar>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgCharacter">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/detail_name"
+                        android:textColor="@color/blue"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/txtEpisodeName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_name"
+                        android:textColor="@color/black"/>
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/detail_air_date"
+                        android:textColor="@color/blue"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/txtEpisodeAirDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_air_date"
+                        android:textColor="@color/black">
+                    </TextView>
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/detail_episode"
+                        android:textColor="@color/blue"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/txtEpisode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_episode"
+                        android:textColor="@color/black">
+                    </TextView>
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

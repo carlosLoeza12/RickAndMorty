@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:navigationBarColor"> @color/blue</item>
     </style>
 
     <style name="SplashThem" parent="Theme.AppCompat.NoActionBar">

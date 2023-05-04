@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.characters.rickandmorty.data.model.Character
+import com.characters.rickandmorty.data.model.Episode
+import com.characters.rickandmorty.data.model.Location
 import com.characters.rickandmorty.repository.CharacterRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,6 +28,18 @@ class CharacterDetailViewModel @Inject constructor (private val repository: Char
 
     private val _isFoundCharacter = MutableLiveData<Boolean>()
     val isFoundCharacter: LiveData<Boolean> = _isFoundCharacter
+
+    private val _isLoadingLocation = MutableLiveData<Boolean>()
+    val isLoadingLocation: LiveData<Boolean> = _isLoadingLocation
+
+    private val _location = MutableLiveData<Location>()
+    val location: LiveData<Location> = _location
+
+    private val _isLoadingEpisode = MutableLiveData<Boolean>()
+    val isLoadingEpisode: LiveData<Boolean> = _isLoadingEpisode
+
+    private val _episode = MutableLiveData<Episode>()
+    val episode: LiveData<Episode> = _episode
 
     fun getCharacter(id: Int) {
         //this method validate if the character is saved
@@ -85,6 +99,48 @@ class CharacterDetailViewModel @Inject constructor (private val repository: Char
                 _isLoading.value = false
                 _isCharacterDelete.value = false
             }
+        }
+    }
+
+    fun getCharacterLocation(locationUrl: String){
+        viewModelScope.launch {
+            _isLoadingLocation.value = true
+
+            try {
+                val locationResult = withContext(Dispatchers.IO){
+                    repository.getCharacterLocation(locationUrl)
+                }
+
+                locationResult?.let {
+                    _location.value = locationResult!!
+                }
+
+                _isLoadingLocation.value = false
+            }catch (e: Exception){
+                _isLoadingLocation.value = false
+            }
+
+        }
+    }
+
+    fun getCharacterEpisode(episodeUrl: String){
+        viewModelScope.launch {
+            _isLoadingEpisode.value = true
+
+            try {
+                val episodeResult = withContext(Dispatchers.IO){
+                    repository.getCharacterEpisode(episodeUrl)
+                }
+
+                episodeResult?.let {
+                    _episode.value = episodeResult!!
+                }
+
+                _isLoadingEpisode.value = false
+            }catch (e: Exception){
+                _isLoadingEpisode.value = false
+            }
+
         }
     }
 }

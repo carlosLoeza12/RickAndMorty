@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/characterFragment"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home_title">
+    </item>
+
+    <item
+        android:id="@+id/characterLocationsFragment"
+        android:icon="@drawable/ic_locations"
+        android:title="@string/locations_tilte">
+    </item>
+
+    <item
+        android:id="@+id/characterEpisodesFragment"
+        android:icon="@drawable/ic_episode"
+        android:title="@string/Episodes_title">
+    </item>
+
+    <item
+        android:id="@+id/characterSavedFragment"
+        android:icon="@drawable/ic_thumb_saved"
+        android:title="@string/save_title">
+    </item>
+
+</menu>

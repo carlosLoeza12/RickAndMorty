@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/characterFragment"
         android:name="com.characters.rickandmorty.ui.character.CharacterFragment"
-        android:label="fragment_character"
-        tools:layout="@layout/fragment_character" >
+        android:label="@string/home_title"
+        tools:layout="@layout/fragment_character">
         <action
             android:id="@+id/action_characterFragment_to_characterDetailsFragment"
             app:destination="@id/characterDetailsFragment"
@@ -21,11 +21,26 @@
     <fragment
         android:id="@+id/characterDetailsFragment"
         android:name="com.characters.rickandmorty.ui.characterdetails.CharacterDetailsFragment"
-        android:label="fragment_character_details"
-        tools:layout="@layout/fragment_character_details" >
+        android:label="@string/detail_title"
+        tools:layout="@layout/fragment_character_details">
         <argument
             android:name="Character"
             app:argType="com.characters.rickandmorty.data.model.Character"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/characterEpisodesFragment"
+        android:name="com.characters.rickandmorty.ui.characterepisodes.CharacterEpisodesFragment"
+        android:label="@string/Episodes_title"
+        tools:layout="@layout/fragment_character_episodes" />
+    <fragment
+        android:id="@+id/characterLocationsFragment"
+        android:name="com.characters.rickandmorty.ui.characterlocations.CharacterLocationsFragment"
+        android:label="@string/locations_tilte"
+        tools:layout="@layout/fragment_character_locations" />
+    <fragment
+        android:id="@+id/characterSavedFragment"
+        android:name="com.characters.rickandmorty.ui.charactersaved.CharacterSavedFragment"
+        android:label="@string/saved_title"
+        tools:layout="@layout/fragment_character_saved" />
 </navigation>
