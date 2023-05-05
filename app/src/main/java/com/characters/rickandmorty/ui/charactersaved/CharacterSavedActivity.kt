@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.characters.rickandmorty.R
 import com.characters.rickandmorty.data.model.Character
 import com.characters.rickandmorty.databinding.ActivityCharacterSavedBinding
-import com.characters.rickandmorty.databinding.PopUpInformationBinding
+import com.characters.rickandmorty.databinding.PopUpInformationYesNoBinding
 import com.characters.rickandmorty.presentation.CharacterSavedViewModel
 import com.characters.rickandmorty.ui.adapters.CharacterSavedAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +28,7 @@ class CharacterSavedActivity : AppCompatActivity(), CharacterSavedAdapter.OnChar
     private var positionCharacterEliminated: Int = -1
     private var isFilteredList = false
     private lateinit var dialog: Dialog
-    private lateinit var bindingPopUp: PopUpInformationBinding
+    private lateinit var bindingPopUp: PopUpInformationYesNoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +50,7 @@ class CharacterSavedActivity : AppCompatActivity(), CharacterSavedAdapter.OnChar
         viewModel.getAllCharacterSaved()
         //Dialog
         dialog = Dialog(this)
-        bindingPopUp = PopUpInformationBinding.inflate(LayoutInflater.from(this))
+        bindingPopUp = PopUpInformationYesNoBinding.inflate(LayoutInflater.from(this))
         dialog.setCancelable(false)
         dialog.setContentView(bindingPopUp.root)
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)

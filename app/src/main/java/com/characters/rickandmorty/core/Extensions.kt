@@ -1,5 +1,7 @@
 package com.characters.rickandmorty.core
 
+import android.app.Dialog
+import android.view.View
 import com.characters.rickandmorty.data.local.CharacterEntity
 import com.characters.rickandmorty.data.model.CharacterList
 import com.characters.rickandmorty.data.model.Character
@@ -37,4 +39,12 @@ fun Character.toCharacterEntity(): CharacterEntity{
         this.gender,
         this.image
     )
+}
+
+
+fun Dialog.initialize(view: View, isCancelable: Boolean): Dialog {
+    this.setContentView(view)
+    this.setCancelable(isCancelable)
+    this.window?.setBackgroundDrawableResource(android.R.color.transparent)
+    return this
 }

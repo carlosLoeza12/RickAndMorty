@@ -12,15 +12,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.characters.rickandmorty.R
+import com.characters.rickandmorty.core.initialize
 import com.characters.rickandmorty.data.model.Character
 import com.characters.rickandmorty.databinding.FragmentCharacterSavedBinding
-import com.characters.rickandmorty.databinding.PopUpInformationBinding
+import com.characters.rickandmorty.databinding.PopUpInformationYesNoBinding
 import com.characters.rickandmorty.presentation.CharacterSavedViewModel
 import com.characters.rickandmorty.ui.adapters.CharacterSavedAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CharacterSavedFragment : Fragment(R.layout.fragment_character_saved),  CharacterSavedAdapter.OnCharacterClickListener {
+class CharacterSavedFragment : Fragment(R.layout.fragment_character_saved),
+    CharacterSavedAdapter.OnCharacterClickListener {
 
     private val viewModel by viewModels<CharacterSavedViewModel>()
     private lateinit var binding: FragmentCharacterSavedBinding
@@ -30,7 +32,7 @@ class CharacterSavedFragment : Fragment(R.layout.fragment_character_saved),  Cha
     private var isFilteredList = false
     private var positionCharacterEliminated: Int = -1
     private lateinit var dialog: Dialog
-    private lateinit var bindingPopUp: PopUpInformationBinding
+    private lateinit var bindingPopUp: PopUpInformationYesNoBinding
     private var firstLoad = false
     private lateinit var menuHost: MenuHost
 
@@ -50,10 +52,8 @@ class CharacterSavedFragment : Fragment(R.layout.fragment_character_saved),  Cha
         showSearchMenu()
         //Dialog
         dialog = Dialog(requireContext())
-        bindingPopUp = PopUpInformationBinding.inflate(LayoutInflater.from(requireContext()))
-        dialog.setCancelable(false)
-        dialog.setContentView(bindingPopUp.root)
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        bindingPopUp = PopUpInformationYesNoBinding.inflate(LayoutInflater.from(requireContext()))
+        dialog.initialize(bindingPopUp.root, false)
 
         //adapter and Recycler
         characterAdapter = CharacterSavedAdapter(mutableListCharacter, this)
