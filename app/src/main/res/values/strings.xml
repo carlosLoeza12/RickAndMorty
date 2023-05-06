@@ -8,6 +8,28 @@
     <string name="Episodes_title">Episodes</string>
     <string name="save_title">Saved</string>
     <string name="error_loading_data">Error loading data</string>
+    <string name="Information_title">Information</string>
+    <string name="Information_yes">yes</string>
+    <string name="Information_no">No</string>
+    <string name="information_quit_app">Do you want to exit the application?</string>
+
+
+    <string name="Information"><b>This app is developed with libraries, technologies and tools: </b> \n \n
+        -Android Studio \n
+        -Kotlin \n
+        -MVVM \n
+        -Navigation component \n
+        -Retrofit and interceptors \n
+        -Dagger hilt \n
+        -Coil \n
+        -Room \n
+        -Paging \n
+        -Coroutines \n
+        -View Binding \n
+        -Github \n\n
+        data provided by: \n
+        https://rickandmortyapi.com/
+  </string>
 
     <!-- Character Fragment -->
     <string name="no_name">No name</string>
