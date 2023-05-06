@@ -14,7 +14,7 @@
     <string name="information_quit_app">Do you want to exit the application?</string>
 
 
-    <string name="Information"> <b> This app is developed with libraries, technologies and tools: </b> \n \n
+    <string name="Information"><b>This app is developed with libraries, technologies and tools: </b> \n \n
         -Android Studio \n
         -Kotlin \n
         -MVVM \n

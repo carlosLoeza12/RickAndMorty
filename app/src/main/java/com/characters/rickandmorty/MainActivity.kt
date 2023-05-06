@@ -61,10 +61,14 @@ class MainActivity : AppCompatActivity() {
         //for click on back
         val isFragmentHome =  navController.currentDestination?.id ==  navController.graph[R.id.characterFragment].id
         if(keyCode == KeyEvent.KEYCODE_BACK && isFragmentHome){
+            // (return false) blocks the on back action and show the dialog
             showQuitAppDialog()
+            return false
         }
         return super.onKeyDown(keyCode, event)
     }
+
+
 
     private fun initComponents(){
 
