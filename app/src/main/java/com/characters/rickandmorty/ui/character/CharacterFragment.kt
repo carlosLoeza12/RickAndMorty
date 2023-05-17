@@ -1,5 +1,6 @@
 package com.characters.rickandmorty.ui.character
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -9,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.characters.rickandmorty.R
 import com.characters.rickandmorty.core.loadStateListener
+import com.characters.rickandmorty.core.validatePermission
+import com.characters.rickandmorty.data.local.Permissions
 import com.characters.rickandmorty.databinding.FragmentCharacterBinding
 import com.characters.rickandmorty.presentation.CharacterViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,6 +19,7 @@ import com.characters.rickandmorty.data.model.Character
 import com.characters.rickandmorty.ui.adapters.CharacterPagingAdapter
 import com.characters.rickandmorty.ui.adapters.LoaderAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.messaging.FirebaseMessaging
 
 @AndroidEntryPoint
 class CharacterFragment : Fragment(R.layout.fragment_character), CharacterPagingAdapter.OnCharacterClickListener {
@@ -24,6 +28,13 @@ class CharacterFragment : Fragment(R.layout.fragment_character), CharacterPaging
     private lateinit var binding: FragmentCharacterBinding
     private lateinit var pagingAdapter: CharacterPagingAdapter
     private var clickPosition = -1
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // its call here because when showing the fragment again it goes through the other states
+        //validate permissions and show notification
+        validateNotificationPermissions()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,7 +53,6 @@ class CharacterFragment : Fragment(R.layout.fragment_character), CharacterPaging
     }
 
     private fun listeners(){
-
         viewModel.list.observe(viewLifecycleOwner) { pagingData ->
             if (pagingData != null) {
                 binding.imgEmptyData.isVisible = false
@@ -75,4 +85,24 @@ class CharacterFragment : Fragment(R.layout.fragment_character), CharacterPaging
         val action = CharacterFragmentDirections.actionCharacterFragmentToCharacterDetailsFragment(character)
         findNavController().navigate(action)
     }
+
+    private fun validateNotificationPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val result = validatePermission(requireContext())
+            if (result == Permissions.ACCEPTED) {
+                sendNotification()
+            }
+        }else{
+           sendNotification()
+        }
+    }
+
+    private fun sendNotification() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            task.result?.let {
+                viewModel.sendNotification(task.result.toString())
+            }
+        }
+    }
+
 }

@@ -2,9 +2,7 @@ package com.characters.rickandmorty.repository
 
 import com.characters.rickandmorty.data.model.*
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Query
-import retrofit2.http.Url
+import retrofit2.http.*
 
 interface WebService {
     @GET("character")
@@ -24,4 +22,12 @@ interface WebService {
 
     @GET("episode")
     suspend fun getAllEpisodesPaging(@Query("page")page: Int): Response<EpisodeList>
+
+    @POST
+    @FormUrlEncoded
+    suspend fun registerToken(@Url url: String, @Field("tokenId") token: String)
+
+    @POST
+    @FormUrlEncoded
+    suspend fun sendNotification(@Url url: String, @Field("tokenId") token: String)
 }

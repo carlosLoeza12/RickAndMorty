@@ -1,11 +1,15 @@
 package com.characters.rickandmorty.core
 
+import android.Manifest
 import android.app.Dialog
 import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
@@ -13,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.characters.rickandmorty.R
 import com.characters.rickandmorty.data.local.CharacterEntity
+import com.characters.rickandmorty.data.local.Permissions
 import com.characters.rickandmorty.data.model.CharacterList
 import com.characters.rickandmorty.data.model.Character
 
@@ -75,5 +80,19 @@ fun PagingDataAdapter<*, *>.loadStateListener(progressBar: ProgressBar, context:
             Toast.makeText(context, context.getString(R.string.error_loading_data), Toast.LENGTH_SHORT).show()
             imgEmptyData.isVisible = true
         }
+    }
+}
+
+fun validatePermission(context: Context): Permissions {
+
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            Permissions.ACCEPTED
+        }else{
+            Permissions.REFUSED
+        }
+
+    }else{
+        Permissions.PREVIOUS_VERSIONS
     }
 }

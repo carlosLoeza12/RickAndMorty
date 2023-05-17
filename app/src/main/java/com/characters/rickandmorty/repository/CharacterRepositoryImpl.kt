@@ -55,4 +55,11 @@ class CharacterRepositoryImpl @Inject constructor(
         return remoteDataSource.getCharacterEpisode(episodeUrl)
     }
 
+    override suspend fun registerToken(token: String) {
+        remoteDataSource.registerToken(token)
+    }
+
+    override suspend fun sendNotification(token: String) {
+        remoteDataSource.sendNotification(token)
+    }
 }
