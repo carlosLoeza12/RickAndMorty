@@ -1,11 +1,15 @@
 package com.characters.rickandmorty
 
-import android.app.Dialog
+import android.Manifest.permission.POST_NOTIFICATIONS
+import android.app.*
+import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -13,14 +17,24 @@ import androidx.navigation.get
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.characters.rickandmorty.core.initialize
+import com.characters.rickandmorty.core.validatePermission
+import com.characters.rickandmorty.data.local.Permissions
 import com.characters.rickandmorty.databinding.ActivityMainBinding
 import com.characters.rickandmorty.databinding.PopUpInformationBinding
 import com.characters.rickandmorty.databinding.PopUpInformationYesNoBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                Toast.makeText(this, "Permisos Aceptados", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "No se aceptaron los permisos", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
@@ -80,6 +94,9 @@ class MainActivity : AppCompatActivity() {
         //set up action bar with nav controller
         NavigationUI.setupActionBarWithNavController(this, navController)
 
+        //Permission for notification
+        askNotificationPermission()
+
         //Dialog information
         popUpInformationBinding = PopUpInformationBinding.inflate(LayoutInflater.from(this))
         appInformationDialog = Dialog(this)
@@ -105,6 +122,15 @@ class MainActivity : AppCompatActivity() {
         quitAppDialog.show()
     }
 
+    private fun askNotificationPermission() {
+        // This is only necessary for API level >= 33 (TIRAMISU)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val result = validatePermission(this)
+            if(result == Permissions.REFUSED || shouldShowRequestPermissionRationale(POST_NOTIFICATIONS)){
+                requestPermissionLauncher.launch(POST_NOTIFICATIONS)
+            }
+        }
+    }
     //code for navigation component
 //    val activityNavigator = ActivityNavigator( this)
 //    activityNavigator.navigate(

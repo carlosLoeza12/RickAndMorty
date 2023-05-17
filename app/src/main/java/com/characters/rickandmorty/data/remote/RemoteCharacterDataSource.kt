@@ -5,10 +5,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
-import com.characters.rickandmorty.data.model.Character
-import com.characters.rickandmorty.data.model.Episode
-import com.characters.rickandmorty.data.model.CharacterList
-import com.characters.rickandmorty.data.model.Location
+import com.characters.rickandmorty.application.AppConstants
+import com.characters.rickandmorty.data.model.*
 import com.characters.rickandmorty.paging.CharacterPagingSource
 import com.characters.rickandmorty.paging.EpisodePagingSource
 import com.characters.rickandmorty.paging.LocationPagingSource
@@ -48,5 +46,13 @@ class RemoteCharacterDataSource @Inject constructor(private val webService: WebS
             config = PagingConfig(pageSize = 1, maxSize = 1000),
             pagingSourceFactory = { EpisodePagingSource(webService) }
         ).liveData
+    }
+
+    suspend fun registerToken(token: String){
+        webService.registerToken(AppConstants.URL_WEB_HOST_INSERT, token)
+    }
+
+    suspend fun sendNotification(token: String){
+        webService.sendNotification(AppConstants.URL_WEB_HOST_SEND_NOTIFICATION, token)
     }
 }

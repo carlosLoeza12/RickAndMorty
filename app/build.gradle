@@ -5,6 +5,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -24,11 +25,15 @@ android {
     defaultConfig {
         applicationId "com.characters.rickandmorty"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 6
         versionName "2.1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        buildConfigField 'String' , 'API_KEY' , "\"${properties.getProperty("API_KEY")}\""
     }
 
     buildTypes {
@@ -40,7 +45,8 @@ android {
         }
 
         debug{
-            applicationIdSuffix ".debug"
+            versionNameSuffix ".debug"
+            //applicationIdSuffix ".debug"
             debuggable true
         }
     }
@@ -114,4 +120,14 @@ dependencies {
 
     //Paging
     implementation("androidx.paging:paging-runtime:3.1.1")
+
+    // Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation platform('com.google.firebase:firebase-bom:32.0.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging'
+
+    //Permission android 13
+    implementation "androidx.fragment:fragment-ktx:1.5.7"
+    implementation "androidx.activity:activity-ktx:1.7.1"
 }

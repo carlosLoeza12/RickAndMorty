@@ -18,4 +18,6 @@ interface CharacterRepository {
     fun getAllEpisodesPaging(): LiveData<PagingData<Episode>>
     suspend fun getCharacterLocation(locationUrl: String): Location?
     suspend fun getCharacterEpisode(episodeUrl: String): Episode?
+    suspend fun registerToken(token: String)
+    suspend fun sendNotification(token: String)
 }
