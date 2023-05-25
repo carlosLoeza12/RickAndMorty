@@ -81,9 +81,12 @@ class CharacterFragment : Fragment(R.layout.fragment_character), CharacterPaging
     }
 
     override fun onCharacterClick(character: Character, position: Int) {
-        clickPosition = position
-        val action = CharacterFragmentDirections.actionCharacterFragmentToCharacterDetailsFragment(character)
-        findNavController().navigate(action)
+        val currentFragment = findNavController().currentDestination?.id ?: -1
+        val destinyFragment = R.id.characterFragment
+        if(currentFragment != -1 && currentFragment == destinyFragment){
+            val action = CharacterFragmentDirections.actionCharacterFragmentToCharacterDetailsFragment(character)
+            findNavController().navigate(action)
+        }
     }
 
     private fun validateNotificationPermissions() {
