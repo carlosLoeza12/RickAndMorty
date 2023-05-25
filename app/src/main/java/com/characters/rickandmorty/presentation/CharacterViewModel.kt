@@ -46,4 +46,10 @@ class CharacterViewModel @Inject constructor(private val repository: CharacterRe
 
     val list: LiveData<PagingData<Character>> =  repository.getAllCharactersPaging().cachedIn(viewModelScope)
 
+    fun sendNotification(token: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.sendNotification(token)
+        }
+    }
+
 }
