@@ -82,6 +82,5 @@
     <string name="text_profile_type_signing">You logged with:</string>
     <string name="format_last_name">Last name: %s</string>
     <string name="format_email">Email: %s</string>
-    <string name="text_exit_app"><u>Exit application</u></string>
-
+    <string name="text_exit_app"><u>Sign out</u></string>
 </resources>

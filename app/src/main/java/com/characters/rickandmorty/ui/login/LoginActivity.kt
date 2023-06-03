@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import com.characters.rickandmorty.MainActivity
 import com.characters.rickandmorty.databinding.ActivityLoginBinding
 import com.characters.rickandmorty.presentation.CharacterLogInViewModel
+import com.facebook.CallbackManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,6 +18,8 @@ class LoginActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<CharacterLogInViewModel>()
     private lateinit var binding: ActivityLoginBinding
+    private val callbackManager: CallbackManager by lazy {CallbackManager.Factory.create()}
+
     private val loginLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
             if (activityResult.resultCode == RESULT_OK) {
@@ -26,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
                     binding.progressBar.visibility = View.VISIBLE
                 }
             } else {
+                binding.btnGmail.isEnabled = true
                 Log.e("error", "Its cancel")
             }
         }
@@ -39,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initElements(){
         binding.btnGmail.setOnClickListener {
+            it.isEnabled = false
             val sigInIntent = viewModel.getSigInIntent(this)
             loginLauncher.launch(sigInIntent)
         }
@@ -48,7 +53,20 @@ class LoginActivity : AppCompatActivity() {
             if(isSaved){
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 finish()
+            }else{
+                binding.btnGmail.isEnabled = true
+                //binding.btnFacebook.isEnabled = true
             }
         }
+
+
+        binding.btnFacebook.setOnClickListener {
+            //viewModel.doLoginFacebook(callbackManager, this)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

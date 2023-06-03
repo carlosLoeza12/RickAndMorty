@@ -17,6 +17,7 @@ import com.characters.rickandmorty.databinding.ActivityProfileBinding
 import com.characters.rickandmorty.databinding.PopUpInformationBinding
 import com.characters.rickandmorty.databinding.PopUpInformationYesNoBinding
 import com.characters.rickandmorty.ui.login.LoginActivity
+import com.facebook.login.LoginManager
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -25,6 +26,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var popUpInformationBinding : PopUpInformationBinding
     private lateinit var popUpQuitAppBinding: PopUpInformationYesNoBinding
     private lateinit var quitAppDialog: Dialog
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun initComponents() {
+        user = UserPreferences.get<User>(UserPreferences.USER_KEY)
         //Status bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.text_profile_title)
@@ -63,14 +66,13 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun setProfileData(){
-       val user = UserPreferences.get<User>(UserPreferences.USER_KEY)
         if(user != null){
-            binding.imgProfile.load(user.urlProfile)
-            binding.txtName.text = getString(R.string.format_location_name, user.name ?: "")
-            binding.txtLastName.text = getString(R.string.format_last_name, user.lastName ?: "")
-            binding.txtEmail.text = getString(R.string.format_email,  user.email ?: "")
+            binding.imgProfile.load(user?.urlProfile)
+            binding.txtName.text = getString(R.string.format_location_name, user?.name ?: "")
+            binding.txtLastName.text = getString(R.string.format_last_name, user?.lastName ?: "")
+            binding.txtEmail.text = getString(R.string.format_email,  user?.email ?: "")
 
-            if(user.sigInType == SigInType.GOOGLE){
+            if(user?.sigInType == SigInType.GOOGLE){
                 binding.imgSignInType.setImageResource(R.drawable.gmail)
             }else{
                 binding.imgSignInType.setImageResource(R.drawable.facebook)
@@ -98,11 +100,7 @@ class ProfileActivity : AppCompatActivity() {
 
         popUpQuitAppBinding.btnYes.setOnClickListener {
             quitAppDialog.dismiss()
-            val intent = Intent(this, LoginActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
-            UserPreferences.wipeData()
-            startActivity(intent)
+            makeLogOut()
         }
 
         popUpQuitAppBinding.btnNo.setOnClickListener {
@@ -110,5 +108,19 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         quitAppDialog.show()
+    }
+
+    private fun makeLogOut(){
+        //clear data shared Preferences
+        UserPreferences.wipeData()
+        //sign out facebook
+        if(user?.sigInType == SigInType.FACEBOOK){
+            LoginManager.getInstance().logOut()
+        }
+
+        val intent = Intent(this, LoginActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        startActivity(intent)
     }
 }
