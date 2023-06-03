@@ -10,6 +10,7 @@ import com.characters.rickandmorty.core.loadStateListener
 import com.characters.rickandmorty.databinding.FragmentCharacterEpisodesBinding
 import com.characters.rickandmorty.presentation.CharacterEpisodesViewModel
 import com.characters.rickandmorty.ui.adapters.EpisodePagingAdapter
+import com.characters.rickandmorty.ui.adapters.GlobalLoaderAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,7 +36,7 @@ class CharacterEpisodesFragment : Fragment(R.layout.fragment_character_episodes)
     private fun initRecycler(){
         pagingAdapter = EpisodePagingAdapter()
         pagingAdapter.loadStateListener(binding.progressBar, requireContext(), binding.imgEmptyData)
-        binding.recyclerEpisodes.initialize(requireContext(), pagingAdapter)
+        binding.recyclerEpisodes.initialize(requireContext(), pagingAdapter.withLoadStateFooter(GlobalLoaderAdapter()))
     }
 
 }

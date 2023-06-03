@@ -3,6 +3,7 @@ package com.characters.rickandmorty.ui.charactersaved
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.core.view.MenuHost
@@ -12,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.characters.rickandmorty.R
+import com.characters.rickandmorty.core.NetworkResult
 import com.characters.rickandmorty.core.initialize
 import com.characters.rickandmorty.data.model.Character
 import com.characters.rickandmorty.databinding.FragmentCharacterSavedBinding
@@ -66,30 +68,60 @@ class CharacterSavedFragment : Fragment(R.layout.fragment_character_saved),
     }
 
     private fun initListeners(){
-        viewModel.characterList.observe(viewLifecycleOwner) { characterList ->
-            if (characterList.isNotEmpty()) {
 
-                binding.imgEmptyData.isVisible = false
-                mutableListCharacter = characterList.toMutableList()
+        viewModel.isCharacterEliminated.observe(viewLifecycleOwner){ isEliminated ->
 
-                if (isFilteredList) {
-                    eliminateCharacterInSearchList()
-                } else {
-                    characterAdapter.updateCharacterRecycler(mutableListCharacter)
-                    firstLoad = true
+            when(isEliminated){
+                is NetworkResult.Loading -> {
+                    binding.progressBar.isVisible = true
                 }
-
-            } else {
-                if (firstLoad) {
-                    binding.imgEmptyData.isVisible = true
-                    mutableListCharacter = mutableListOf()
-                    characterAdapter.updateCharacterRecycler(mutableListCharacter)
+                is NetworkResult.Success -> {
+                    binding.progressBar.isVisible = false
+                    if (isEliminated.data == true){
+                        viewModel.getAllCharacterSaved()
+                    }
+                }
+                is NetworkResult.Error -> {
+                    binding.progressBar.isVisible = false
+                    Toast.makeText(requireContext(), getString(R.string.error_loading_data), Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner){ isLoading ->
-            binding.progressBar.isVisible = isLoading
+        viewModel.networkResult.observe(viewLifecycleOwner){result ->
+            when(result){
+
+                is NetworkResult.Loading -> {
+                    binding.progressBar.isVisible = true
+                }
+
+                is NetworkResult.Success -> {
+                    binding.progressBar.isVisible = false
+
+                    if(!result.data.isNullOrEmpty()){
+                        binding.imgEmptyData.isVisible = false
+                        mutableListCharacter = result.data.toMutableList()
+
+                        if (isFilteredList) {
+                            eliminateCharacterInSearchList()
+                        } else {
+                            characterAdapter.updateCharacterRecycler(mutableListCharacter)
+                            firstLoad = true
+                        }
+                    }else{
+                        if (firstLoad) {
+                            binding.imgEmptyData.isVisible = true
+                            mutableListCharacter = mutableListOf()
+                            characterAdapter.updateCharacterRecycler(mutableListCharacter)
+                        }
+                    }
+                }
+
+                is NetworkResult.Error -> {
+                    binding.progressBar.isVisible = false
+                    Toast.makeText(requireContext(), getString(R.string.error_loading_data), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
     }
@@ -151,7 +183,8 @@ class CharacterSavedFragment : Fragment(R.layout.fragment_character_saved),
         bindingPopUp.btnYes.setOnClickListener {
             dialog.dismiss()
             positionCharacterEliminated = position
-            makeCharacterDelete(character.id)
+            //makeCharacterDelete(character.id)
+            viewModel.deleteCharacter(character.id)
         }
 
         bindingPopUp.btnNo.setOnClickListener {
@@ -161,10 +194,4 @@ class CharacterSavedFragment : Fragment(R.layout.fragment_character_saved),
         dialog.show()
     }
 
-    private fun makeCharacterDelete(characterId: Int){
-        val result = viewModel.deleteCharacter(characterId)
-        if(result){
-          viewModel.getAllCharacterSaved()
-        }
-    }
 }

@@ -83,17 +83,17 @@ class CharacterSavedActivity : AppCompatActivity(), CharacterSavedAdapter.OnChar
 
 
     private fun initListeners(){
-        viewModel.characterList.observe(this) { characterList ->
-            if (characterList.isNotEmpty()) {
-                binding.imgEmptyData.isVisible = false
-                mutableListCharacter = characterList.toMutableList()
-                initRecycler(mutableListCharacter)
-            }
-        }
+//        viewModel.characterList.observe(this) { characterList ->
+//            if (characterList.isNotEmpty()) {
+//                binding.imgEmptyData.isVisible = false
+//                mutableListCharacter = characterList.toMutableList()
+//                initRecycler(mutableListCharacter)
+//            }
+//        }
 
-        viewModel.isLoading.observe(this){ isLoading ->
-            binding.progressBar.isVisible = isLoading
-        }
+//        viewModel.isLoading.observe(this){ isLoading ->
+//            binding.progressBar.isVisible = isLoading
+//        }
 
 //        viewModel.isCharacterDelete.observe(this) { isDeleted ->
 //            if (isDeleted && isFilteredList) {

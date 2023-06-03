@@ -34,6 +34,10 @@ android {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
         buildConfigField 'String' , 'API_KEY' , "\"${properties.getProperty("API_KEY")}\""
+        resValue "string", "FACEBOOK_APP_ID", (properties.getProperty("FACEBOOK_APP_ID") ?: "")
+        resValue "string", "FACEBOOK_LOGIN_PROTOCOL_SCHEME", (properties.getProperty("FACEBOOK_LOGIN_PROTOCOL_SCHEME") ?: "")
+        resValue "string", "FACEBOOK_CLIENT_TOKEN", (properties.getProperty("FACEBOOK_CLIENT_TOKEN") ?: "")
+
     }
 
     buildTypes {
@@ -130,4 +134,16 @@ dependencies {
     //Permission android 13
     implementation "androidx.fragment:fragment-ktx:1.5.7"
     implementation "androidx.activity:activity-ktx:1.7.1"
+
+    //SigIn Google
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.9.0'
+
+    //Circle ImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Sign in facebook
+    implementation 'com.facebook.android:facebook-login:latest.release'
 }

@@ -48,7 +48,11 @@ class CharacterViewModel @Inject constructor(private val repository: CharacterRe
 
     fun sendNotification(token: String){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.sendNotification(token)
+            try {
+                repository.sendNotification(token)
+            } catch (e: Exception) {
+                println(e.toString())
+            }
         }
     }
 
