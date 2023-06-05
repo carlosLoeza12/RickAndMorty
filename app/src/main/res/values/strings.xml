@@ -2,6 +2,7 @@
 
     <!-- General-->
     <string name="app_name">RickAndMorty</string>
+    <string name="login_title">Login</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_title">Home</string>
     <string name="locations_tilte">Locations</string>
@@ -28,8 +29,6 @@
         -View Binding \n
         -Push notifications \n
         -Github \n\n
-        data provided by: \n
-        https://rickandmortyapi.com/
   </string>
 
     <!-- Character Fragment -->
@@ -69,4 +68,19 @@
     <string name="format_episode_air_date">Air date: %s</string>
     <string name="format_episode">Episode: %s</string>
 
+    <!-- Character Login-->
+    <string name="text_button_gmail">Gmail</string>
+    <string name="text_button_facebook">Facebook</string>
+    <string name="data_provided">Data provided by The Rick and Morty API </string>
+    <string name="text_login_with">Login with</string>
+
+    <!-- Character profile-->
+    <string name="text_profile_title">Profile</string>
+    <string name="text_information_title">This is your information!</string>
+    <string name="text_last_name_title">Last name</string>
+    <string name="text_email_title">Email</string>
+    <string name="text_profile_type_signing">You logged with:</string>
+    <string name="format_last_name">Last name: %s</string>
+    <string name="format_email">Email: %s</string>
+    <string name="text_exit_app"><u>Sign out</u></string>
 </resources>

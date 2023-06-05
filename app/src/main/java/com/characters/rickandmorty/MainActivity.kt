@@ -2,6 +2,7 @@ package com.characters.rickandmorty
 
 import android.Manifest.permission.POST_NOTIFICATIONS
 import android.app.*
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
@@ -11,6 +12,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.get
@@ -22,6 +24,7 @@ import com.characters.rickandmorty.data.local.Permissions
 import com.characters.rickandmorty.databinding.ActivityMainBinding
 import com.characters.rickandmorty.databinding.PopUpInformationBinding
 import com.characters.rickandmorty.databinding.PopUpInformationYesNoBinding
+import com.characters.rickandmorty.ui.profile.ProfileActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,6 +45,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var quitAppDialog: Dialog
     private lateinit var popUpInformationBinding : PopUpInformationBinding
     private lateinit var popUpQuitAppBinding: PopUpInformationYesNoBinding
+    private val activityNavigator: ActivityNavigator by lazy {
+        ActivityNavigator(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,14 +64,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //Menu in action bar
-        menuInflater.inflate(R.menu.info_menu, menu)
+        menuInflater.inflate(R.menu.profile_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.navInfo -> {
-                appInformationDialog.show()
+            R.id.navProfile -> {
+                //appInformationDialog.show()
+                activityNavigator.navigate(
+                    activityNavigator.createDestination().setIntent(
+                        Intent(this, ProfileActivity::class.java)
+                    ), null, null, null
+                )
             }
         }
         return super.onOptionsItemSelected(item)
@@ -131,17 +142,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    //code for navigation component
-//    val activityNavigator = ActivityNavigator( this)
-//    activityNavigator.navigate(
-//    activityNavigator.createDestination().setIntent(
-//    Intent(
-//    this,
-//    CharacterSavedActivity::class.java
-//    )
-//    ), null, null, null
-//    )
-
 
 //    private fun appConfigs(){
 //

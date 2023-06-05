@@ -9,6 +9,7 @@ import com.characters.rickandmorty.core.initialize
 import com.characters.rickandmorty.core.loadStateListener
 import com.characters.rickandmorty.databinding.FragmentCharacterLocationsBinding
 import com.characters.rickandmorty.presentation.CharacterLocationViewModel
+import com.characters.rickandmorty.ui.adapters.GlobalLoaderAdapter
 import com.characters.rickandmorty.ui.adapters.LocationPagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,7 +38,7 @@ class CharacterLocationsFragment : Fragment(R.layout.fragment_character_location
         pagingAdapter = LocationPagingAdapter()
         //show/hide progressbar
         pagingAdapter.loadStateListener(binding.progressBar, requireContext(), binding.imgEmptyData)
-        binding.recyclerLocations.initialize(requireContext(), pagingAdapter)
+        binding.recyclerLocations.initialize(requireContext(), pagingAdapter.withLoadStateFooter(GlobalLoaderAdapter()))
     }
 
 }
