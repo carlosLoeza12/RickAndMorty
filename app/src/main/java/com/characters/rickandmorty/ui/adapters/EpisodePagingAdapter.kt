@@ -3,6 +3,7 @@ package com.characters.rickandmorty.ui.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -41,6 +42,7 @@ class EpisodePagingAdapter : PagingDataAdapter<Episode, EpisodePagingAdapter.Vie
             binding.txtOriginName.text = context.getString(R.string.format_location_name, episode.name)
             binding.txtOriginType.text = context.getString(R.string.format_episode_air_date, episode.air_date)
             binding.txtOriginDimension.text = context.getString(R.string.format_episode, episode.episode)
+            binding.cardView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_item_from_left))
         }
     }
 }

@@ -2,6 +2,7 @@ package com.characters.rickandmorty.ui.characterlocations
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.characters.rickandmorty.R
@@ -29,15 +30,21 @@ class CharacterLocationsFragment : Fragment(R.layout.fragment_character_location
 
         viewModel.locationResult.observe(viewLifecycleOwner) { pagingData ->
             if (pagingData != null) {
+                binding.linearNoData.isVisible = false
                 pagingAdapter.submitData(lifecycle, pagingData)
             }
+        }
+
+        binding.txtTryAgain.setOnClickListener {
+            binding.linearNoData.isVisible = false
+            pagingAdapter.retry()
         }
     }
 
     private fun initRecycler(){
         pagingAdapter = LocationPagingAdapter()
         //show/hide progressbar
-        pagingAdapter.loadStateListener(binding.progressBar, requireContext(), binding.imgEmptyData)
+        pagingAdapter.loadStateListener(binding.progressBar, requireContext(), binding.linearNoData)
         binding.recyclerLocations.initialize(requireContext(), pagingAdapter.withLoadStateFooter(GlobalLoaderAdapter()))
     }
 
