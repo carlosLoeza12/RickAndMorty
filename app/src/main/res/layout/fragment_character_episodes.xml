@@ -17,17 +17,36 @@
        android:elevation="4dp">
    </ProgressBar>
 
-   <ImageView
-       android:id="@+id/imgEmptyData"
-       android:layout_width="200dp"
-       android:layout_height="200dp"
-       android:src="@drawable/empty_data"
+   <LinearLayout
+       android:id="@+id/linearNoData"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintTop_toTopOf="parent"
        app:layout_constraintBottom_toBottomOf="parent"
-       android:visibility="gone">
-   </ImageView>
+       android:elevation="4dp">
+
+      <TextView
+          android:id="@+id/txtTryAgain"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/text_retry"
+          android:textColor="@color/blue"
+          android:textSize="20sp"
+          android:textStyle="italic"
+          android:layout_marginBottom="10dp"
+          android:layout_gravity="center"/>
+
+      <ImageView
+          android:layout_width="200dp"
+          android:layout_height="200dp"
+          android:src="@drawable/empty_data"
+          android:layout_gravity="center">
+      </ImageView>
+
+   </LinearLayout>
 
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/recyclerEpisodes"
