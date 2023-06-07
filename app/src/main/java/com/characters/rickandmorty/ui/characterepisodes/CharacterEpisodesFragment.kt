@@ -3,6 +3,7 @@ package com.characters.rickandmorty.ui.characterepisodes
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.characters.rickandmorty.R
 import com.characters.rickandmorty.core.initialize
@@ -28,14 +29,20 @@ class CharacterEpisodesFragment : Fragment(R.layout.fragment_character_episodes)
 
         viewModel.list.observe(viewLifecycleOwner){ pagingData ->
             if(pagingData != null){
+                binding.linearNoData.isVisible = false
                 pagingAdapter.submitData(lifecycle, pagingData)
             }
+        }
+
+        binding.txtTryAgain.setOnClickListener {
+            binding.linearNoData.isVisible = false
+            pagingAdapter.retry()
         }
     }
 
     private fun initRecycler(){
         pagingAdapter = EpisodePagingAdapter()
-        pagingAdapter.loadStateListener(binding.progressBar, requireContext(), binding.imgEmptyData)
+        pagingAdapter.loadStateListener(binding.progressBar, requireContext(), binding.linearNoData)
         binding.recyclerEpisodes.initialize(requireContext(), pagingAdapter.withLoadStateFooter(GlobalLoaderAdapter()))
     }
 

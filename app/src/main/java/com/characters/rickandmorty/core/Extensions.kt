@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.view.View
-import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -70,7 +70,7 @@ fun RecyclerView.initialize(context: Context, adapter: RecyclerView.Adapter<*>){
     this.adapter = adapter
 }
 
-fun PagingDataAdapter<*, *>.loadStateListener(progressBar: ProgressBar, context: Context, imgEmptyData: ImageView){
+fun PagingDataAdapter<*, *>.loadStateListener(progressBar: ProgressBar, context: Context, linearNoData: LinearLayout){
 
     this.addLoadStateListener { loadState ->
 
@@ -78,7 +78,7 @@ fun PagingDataAdapter<*, *>.loadStateListener(progressBar: ProgressBar, context:
 
         if(loadState.source.refresh is LoadState.Error){
             Toast.makeText(context, context.getString(R.string.error_loading_data), Toast.LENGTH_SHORT).show()
-            imgEmptyData.isVisible = true
+            linearNoData.isVisible = true
         }
     }
 }

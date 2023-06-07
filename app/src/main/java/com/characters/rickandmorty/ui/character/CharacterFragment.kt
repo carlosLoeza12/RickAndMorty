@@ -55,16 +55,21 @@ class CharacterFragment : Fragment(R.layout.fragment_character), CharacterPaging
     private fun listeners(){
         viewModel.list.observe(viewLifecycleOwner) { pagingData ->
             if (pagingData != null) {
-                binding.imgEmptyData.isVisible = false
+                binding.linearNoData.isVisible = false
                 pagingAdapter.submitData(lifecycle, pagingData)
             }
+        }
+
+        binding.txtTryAgain.setOnClickListener {
+            binding.linearNoData.isVisible = false
+            pagingAdapter.retry()
         }
     }
 
     private fun initRecycler() {
         pagingAdapter = CharacterPagingAdapter(this)
 
-        pagingAdapter.loadStateListener(binding.progressBar, requireContext(), binding.imgEmptyData)
+        pagingAdapter.loadStateListener(binding.progressBar, requireContext(), binding.linearNoData)
 
         binding.recyclerCharacters.apply {
             layoutManager = GridLayoutManager(this@CharacterFragment.context, 2)

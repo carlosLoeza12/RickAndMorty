@@ -1,11 +1,14 @@
 package com.characters.rickandmorty.ui.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.characters.rickandmorty.R
 import com.characters.rickandmorty.data.model.Character
 import com.characters.rickandmorty.databinding.CharacterListItemBinding
 
@@ -31,7 +34,7 @@ class CharacterPagingAdapter(private val onCharacterClickListener: OnCharacterCl
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val itemBinding = CharacterListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        val holder = CharacterViewHolder(itemBinding)
+        val holder = CharacterViewHolder(itemBinding, parent.context)
 
         itemBinding.root.setOnClickListener {
             val position = holder.bindingAdapterPosition.takeIf {
@@ -58,10 +61,14 @@ class CharacterPagingAdapter(private val onCharacterClickListener: OnCharacterCl
 
     }
 
-    inner class CharacterViewHolder(private val binding: CharacterListItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class CharacterViewHolder(private val binding: CharacterListItemBinding, private val context: Context): RecyclerView.ViewHolder(binding.root) {
         fun bind(character: Character){
-            binding.imgCharacter.load(character.image)
+            binding.imgCharacter.load(character.image){
+                crossfade(true)
+                crossfade(200)
+            }
             binding.txtCharacterName.text = character.name
+            binding.cardView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_item_from_left))
         }
     }
 

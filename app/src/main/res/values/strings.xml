@@ -13,7 +13,7 @@
     <string name="Information_yes">yes</string>
     <string name="Information_no">No</string>
     <string name="information_quit_app">Do you want to exit the application?</string>
-
+    <string name="text_retry"><u>Try again</u></string>
 
     <string name="Information"><b>This app is developed with libraries, technologies and tools: </b> \n \n
         -Android Studio \n
