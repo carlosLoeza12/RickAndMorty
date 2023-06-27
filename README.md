@@ -17,11 +17,22 @@ Seguidamente se analizó el diseño y las funciones en general que tendría la a
 #Room
 #Paging
 #Coroutines
+#Push Notifications
+#login Gmail
 
 Capturas:
+![Screenshot_2023-06-27-16-15-50-614_com characters rickandmorty](https://github.com/carlosLoeza12/RickAndMorty/assets/68243731/78b080d3-5047-4a68-aa03-5911c049d8e3)
 
-![2021c1db-1816-435d-b4e9-f3b8dd1c8ea3](https://user-images.githubusercontent.com/68243731/232927557-f842f765-bb0a-40d4-9fff-6ee98f4ec000.jpg)
-![842af7f3-de2e-48f9-9cf4-013c28908a96](https://user-images.githubusercontent.com/68243731/232927569-1a0c8b9e-db9e-469f-830b-2b2cf4ff3ac7.jpg)
-![a0f09759-9461-4b80-8582-9b228b7d66d0](https://user-images.githubusercontent.com/68243731/232927589-ca031060-271c-4dca-9fa8-0ff8f7642ed2.jpg)
-![8200495f-bef4-45b8-bc5e-d97e950d4526](https://user-images.githubusercontent.com/68243731/232927595-c9891a7f-7b04-4656-931f-c9536d192fb7.jpg)
-![f751df55-ae78-4178-b4f8-cc5f8af5fe49](https://user-images.githubusercontent.com/68243731/232927599-7ae50c7d-333d-449f-b310-1cd2391bac4f.jpg)
+![Screenshot_2023-06-27-16-17-38-358_com characters rickandmorty](https://github.com/carlosLoeza12/RickAndMorty/assets/68243731/8ade8276-ec45-4bc0-89e7-31a4e60f6ff1)
+
+![Screenshot_2023-06-27-16-16-01-364_com characters rickandmorty](https://github.com/carlosLoeza12/RickAndMorty/assets/68243731/04067416-e25f-479b-9d17-6612c4be1c3a)
+
+![Screenshot_2023-06-27-16-16-15-420_com characters rickandmorty](https://github.com/carlosLoeza12/RickAndMorty/assets/68243731/165e8ebb-9ff1-4e94-8ea1-c5ab245c81c0)
+
+![Screenshot_2023-06-27-16-16-08-075_com characters rickandmorty](https://github.com/carlosLoeza12/RickAndMorty/assets/68243731/db37e313-4411-43ad-9774-6964ccbf05d9)
+
+![Screenshot_2023-06-27-16-16-46-684_com characters rickandmorty](https://github.com/carlosLoeza12/RickAndMorty/assets/68243731/3866babf-8c1c-4996-941b-3efc8c8b4b16)
+
+![Screenshot_2023-06-27-16-18-30-949_com characters rickandmorty](https://github.com/carlosLoeza12/RickAndMorty/assets/68243731/0092ef27-6cef-4301-a2ad-eb1616889bf4)
+
+
