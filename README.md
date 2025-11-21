@@ -1,25 +1,27 @@
 # RickAndMorty
 
-Disponible en Google play: https://play.google.com/store/apps/details?id=com.characters.rickandmorty
+Available in Google play: https://play.google.com/store/apps/details?id=com.characters.rickandmorty
 
-# Descripción general: 
-Al abrir la aplicación podrá iniciar sesión con su cuenta de Gmail, cabe mencionar que estos datos solo se almacenan localmente en el dispositivo, seguidamente en el home recibirá una notificación de bienvenida por parte de FCM que esta integrado a 000webhost, también se muestra una lista paginada de personajes de la serie de Rick and Morty. Al hacer click en algún ítem de la lista se navegará hacia el detalle mostrando: el estado, especie, género, tipo y más. 
+# Overview: 
+When opening the application, the user can sign in with their Gmail account. It is important to mention that this data is stored only locally on the device.
+After signing in, the home screen will display a welcome notification sent through FCM, which is integrated with 000webhost. Additionally, a paginated list of characters from the Rick and Morty series will be displayed.
+By selecting any character from the list, the user will navigate to a detail screen showing more complete information such as status, species, gender, type, and other additional data. 
 
-Tendrá la opción de guardar el personaje localmente presionando el icono de pulgar arriba, de manera que podrá visualizarlos de modo offline cuando quiera.
+You will have the option to save the character locally by tapping the thumbs-up icon, allowing you to view them offline whenever you want.
 
-Se muestra las listas paginadas de las ubicaciones y episodios de la serie con su respectiva información.
+Paginated lists of the series’ locations and episodes are displayed, along with their corresponding information.
 
-En el apartado saved podrá ver los personajes que ha guardado anteriormente, puede utilizar el buscador para agilizar la búsqueda. Puede eliminar los personajes guardados presionando el icono de contenedor rojo.
+In the Saved section, you can view the characters you have previously stored, and you can use the search bar to quickly find them. You can delete saved characters by tapping the red trash can icon.
 
-En la parte superior derecha se muestra un icono de usuario de color blanco, si lo presiona navegara al perfil mostrando la información del usuario y la cuenta de Gmail con la que ha iniciado, puede cerrar la sesión presionando el texto de color rojo “Sign out”.
+In the upper right corner, a white user icon is displayed. If you tap it, you will navigate to the profile screen, where you can view the user’s information and the Gmail account used to sign in. You can sign out by tapping the red “Sign out” text.
 
-Para abordar este proyecto primeramente se revisó la documentación de la API (The Rick and Morty API) y con la herramienta de Postman se hicieron las peticiones de prueba para visualizar la respuesta en formato Json. Seguidamente se analizó el diseño y las funciones en general que tendría la app, cabe mencionar que se tomaron en cuenta algunos ejemplos y practicas recomendadas para poder desarrollarla.
+To begin this project, the documentation of The Rick and Morty API was reviewed, and test requests were made using Postman to visualize the responses in JSON format. Afterwards, the app’s overall design and functionality were analyzed. It is worth mentioning that some examples and recommended best practices were taken into consideration during development.
 
-Se registro y configuro el proyecto en la consola de firebase, ya que de esta manera podemos habilitar las notificaciones push y obtener las credenciales necesarias para este servicio, luego con 000webhost se creó un endpoint con php y este es el que recibe el token del dispositivo, crea y envía la notificación utilizando las credenciales de firebase.
+The project was registered and configured in the Firebase console, allowing push notifications to be enabled and the necessary credentials for this service to be obtained. Then, using 000webhost, a PHP endpoint was created, which receives the device token and generates and sends the notification using Firebase credentials.
 
-Por ultimo se hizo las configuraciones necesarias para firmar y generar el archivo reléase del proyecto, se procedió a realizar el registro en la tienda de Google play y subir los archivos necesarios para mandar a revisión el proyecto. Al pasar unos días la app paso a estar disponible en la tienda.
+Lastly, the necessary configurations were made to sign and generate the project’s release file. The registration on the Google Play Store was then completed, and the required files were uploaded to submit the project for review. After a few days, the app became available in the store.
 
-# Tecnologias y herramientas
+# Technologies and tools
 
 #Android Studio
 #Kotlin
@@ -46,7 +48,7 @@ Google play console: https://play.google.com/console/about/
 
 Firebase Console: https://console.firebase.google.com/
 
-# Capturas:
+# screenshots:
 
 <img width="172" alt="Imagen1" src="https://github.com/carlosLoeza12/RickAndMorty/assets/68243731/39d2cfd1-b4d9-499e-bebf-c8db59a77bff">
 
